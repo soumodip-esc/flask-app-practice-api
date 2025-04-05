@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 # Define Database Model (Matches your table structure)
 class Music(db.Model):
-    __tablename__ = 'music_table'  # ✅ Fix: Match your actual MySQL table name
+    __tablename__ = 'music_table'  # Fix: Match your actual MySQL table name
     
     id = db.Column(db.Integer, primary_key=True)
     sad_music = db.Column(db.String(50))
@@ -52,7 +52,7 @@ class Music(db.Model):
 @app.route('/songs', methods=['GET'])
 def get_songs():
     songs = Music.query.all()
-    return jsonify([song.to_dict() for song in songs])  # ✅ Added jsonify()
+    return jsonify([song.to_dict() for song in songs])  #  Added jsonify()
 
 # Route to Fetch Songs by Genre
 @app.route('/songs/<genre>', methods=['GET'])
@@ -64,11 +64,11 @@ def get_songs_by_genre(genre):
     ]
     
     if genre not in allowed_genres:
-        return jsonify({"error": "Invalid genre"}), 400  # ✅ Added jsonify()
+        return jsonify({"error": "Invalid genre"}), 400  #  Added jsonify()
 
     songs = Music.query.with_entities(getattr(Music, genre)).filter(getattr(Music, genre).isnot(None)).all()
     
-    return jsonify({genre: [song[0] for song in songs]})  # ✅ Added jsonify()
+    return jsonify({genre: [song[0] for song in songs]})  #  Added jsonify()
 
 # Run Flask App
 if __name__ == '__main__':
