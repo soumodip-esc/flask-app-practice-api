@@ -1,8 +1,9 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS  #  Import CORS
 
-# Initialize Flask App
-app = Flask(__name__)
+app = Flask(__name__) #Initialize App
+CORS(app)
 
 # Database Configuration (Update with your credentials)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
