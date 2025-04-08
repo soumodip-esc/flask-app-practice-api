@@ -1,14 +1,15 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS  #  Import CORS
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__) #Initialize App
 CORS(app)
 
 # Database Configuration (Update with your credentials)
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mysql+pymysql://root:bfPvvgFkvtgXGYMTmAOyxujwAAdBvhoX@tramway.proxy.rlwy.net:24647/project_practice"
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URI');
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Initialize Database
