@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import time
 import requests
-from spotify_token import get_token  
+#from spotify_token import get_token  
 
 # Load environment variables
 load_dotenv()
