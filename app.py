@@ -12,8 +12,12 @@ import requests
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+app.config.update(
+    SESSION_COOKIE_SAMESITE="None",  # Allow cross-site cookies
+    SESSION_COOKIE_SECURE=True       # Required for HTTPS (Render + Vercel)
+)
 
+# CORS(app)
 CORS(app, origins=["https://music-recommender-app.vercel.app"], supports_credentials=True)
 
 #Blueprint For Spotify
