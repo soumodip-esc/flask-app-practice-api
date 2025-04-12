@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import time
 import requests
-from spotify_token import get_token  
+
 
 # Load environment variables
 load_dotenv()
@@ -14,11 +14,12 @@ app = Flask(__name__)
 CORS(app)
 
 # Database Configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URI')
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Initialize Database
 db = SQLAlchemy(app)
+
 
 # Define Music Table Model
 class Music(db.Model):
@@ -81,23 +82,43 @@ class Music(db.Model):
             "developers_choice_music": self.developers_choice_music,
         }
 
+
 # Route to fetch all songs
 @app.route("/songs", methods=["GET"])
 def get_songs():
     songs = Music.query.all()
     return jsonify([song.to_dict() for song in songs])
 
+
 # Route to fetch songs by genre
 @app.route("/songs/<genre>", methods=["GET"])
 def get_songs_by_genre(genre):
     allowed_genres = [
-        "sad_music", "romantic_music", "party_music", "happy_music",
-        "melancholy_music", "focus_music", "instrumental_music", "k_pop_music",
-        "electronic_music", "rnb_music", "blues_music", "personal_fav",
-        "native_music", "classical_music", "workout_music", "rock_music",
-        "rap_music", "pop_music", "jazz_music", "motivaton_music",
-        "trending_music", "latest_music", "top10_music",
-        "hidden_gems_music", "developers_choice_music"
+        "sad_music",
+        "romantic_music",
+        "party_music",
+        "happy_music",
+        "melancholy_music",
+        "focus_music",
+        "instrumental_music",
+        "k_pop_music",
+        "electronic_music",
+        "rnb_music",
+        "blues_music",
+        "personal_fav",
+        "native_music",
+        "classical_music",
+        "workout_music",
+        "rock_music",
+        "rap_music",
+        "pop_music",
+        "jazz_music",
+        "motivaton_music",
+        "trending_music",
+        "latest_music",
+        "top10_music",
+        "hidden_gems_music",
+        "developers_choice_music",
     ]
 
     if genre not in allowed_genres:
@@ -153,10 +174,7 @@ def get_token():
     return jsonify({"access_token": access_token})
 
 
-
 # Run the Flask app
 if __name__ == "__main__":
     print("Flask app is starting...")
     app.run(debug=True)
-
-
