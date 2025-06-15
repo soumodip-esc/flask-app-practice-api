@@ -451,3 +451,4 @@ def get_user_playlists():
         return jsonify({"error": "Failed to fetch playlists", "details": res.text}), 400
 
     return jsonify(res.json())
+
